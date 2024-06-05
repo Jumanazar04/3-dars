@@ -4,7 +4,7 @@ const Counter = memo(({ count, increment }) => {
   console.log('Counter component re-rendered');
   
   return (
-    <div>
+    <div className='flex flex-col gap-3'>
       <p>Count: {count}</p>
       <button onClick={increment}>+</button>
     </div>
