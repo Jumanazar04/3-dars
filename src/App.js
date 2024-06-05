@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useCallback } from 'react';
+import Counter from './components/Counter';
 
 function App() {
+  const [showMessage, setShowMessage] = useState(true);
+  const [count, setCount] = useState(0);
+
+  const toggleMessage = () => {
+    setShowMessage(prevShowMessage => !prevShowMessage);
+  };
+
+  const increment = useCallback(() => {
+    setCount(prevCount => prevCount + 1);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='w-screen h-screen flex justify-center items-center flex-col gap-5 '>
+      <button className='border rounded bg-blue-600 text-white py-1 px-3' onClick={toggleMessage}>
+        {showMessage ? 'Hide message' : 'Show message'}
+      </button>
+      {showMessage && <p>Message</p>}
+      <Counter count={count} increment={increment} />
     </div>
   );
 }
